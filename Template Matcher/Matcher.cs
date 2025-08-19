@@ -28,6 +28,9 @@ namespace Template_Matcher
             if (searchImage == null) { throw new ArgumentNullException("Search Image"); }
             if (templateImage == null) { throw new ArgumentNullException("Template Image"); }
 
+            CvInvoke.Imwrite("../../examples/Template.jpg", templateImage);
+            CvInvoke.Imwrite("../../examples/Search.jpg", searchImage);
+
             resultImage = searchImage.Clone();
 
             // create pyramids
