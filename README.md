@@ -3,6 +3,7 @@ This project is a complete one-shot solution for detecting objects in an image.
 ## Process
 As an example this sharpie marker will be detected in the image below.
 ![alt text](https://github.com/juliandevv/Template-Matcher/blob/master/Template%20Matcher/examples/Search.jpg)
+
 The program takes a single example image of the object. This is called the template image.
 
 ![alt text](https://github.com/juliandevv/Template-Matcher/blob/master/Template%20Matcher/examples/Template.jpg)
@@ -34,7 +35,6 @@ The matching operation is performed again, this time with the full-size images a
 
 ## Limitations
 This algorithm is very useful due to it's one-shot capabilities however, it works under certain assumptions.
-- The lighting must be identical in the template image and search image
 - Perspective warp is not considered, the object must have only undergone a 2D affine transform in the search image
 - The object cannot be occluded
 - The scale of the object must be the same as in the template image.
