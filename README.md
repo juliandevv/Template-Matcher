@@ -37,6 +37,7 @@ This algorithm is very useful due to it's one-shot capabilities however, it work
 - The lighting must be identical in the template image and search image
 - Perspective warp is not considered, the object must have only undergone a 2D affine transform in the search image
 - The object cannot be occluded
+- The scale of the object must be the same as in the template image.
 Despite these limiations this algorithm is useful for object detection in controlled environments such as pick and place operations on conveyors.
 
 ## Improvements
