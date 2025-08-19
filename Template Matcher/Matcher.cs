@@ -33,6 +33,7 @@ namespace Template_Matcher
             // create pyramids
             var searchImagePyramid = new ImagePyramid(searchImage, 2, settings.ScaleFactor);
             var templateImagePyramid = new ImagePyramid(templateImage, 2, settings.ScaleFactor);
+            CvInvoke.Imwrite("examples/Pyramid.jpg", searchImagePyramid.GetLayer(1));
 
             var thetaRange = 360;
             //var peakThresh = 4; // number of stds from the mean to be considered
@@ -72,6 +73,7 @@ namespace Template_Matcher
                 var rotatedRect = new RotatedRect(match.GetCenter(), templateImage.Size, Convert.ToSingle(-match.Rotation));
                 var pts = Array.ConvertAll(rotatedRect.GetVertices(), Point.Round);
                 CvInvoke.Polylines(resultImage, pts, true, new MCvScalar(0, 255, 0), 2);
+                CvInvoke.Imwrite("examples/Result.jpg", resultImage);
                 //CvInvoke.Rectangle(resultImage, match.Bounds, new MCvScalar(0, 0, 255));
             }
 
@@ -105,7 +107,14 @@ namespace Template_Matcher
                 CvInvoke.WarpAffine(templateImage, rotatedTemplateImage, rotationMatrix, boundingRect.Size, warpMethod: Warp.FillOutliers);
 
                 CvInvoke.MatchTemplate(searchImage, rotatedTemplateImage, matchResult, settings.SimilarityMeasure);
-                
+                if (angle == 316)
+                {
+                    var savimg = new Mat();
+                    matchResult.ConvertTo(savimg, DepthType.Cv8U, 255);
+                    CvInvoke.Imwrite("examples/Rotate.jpg", rotatedTemplateImage);
+                    CvInvoke.Imwrite("examples/InitialMatches.jpg", savimg);
+                }
+
                 double maxVal = 0;
                 double minval = 0;
                 var maxLoc = new Point();
@@ -127,7 +136,7 @@ namespace Template_Matcher
                     {
                         matches.Add(new BoundingBox(new Rectangle(maxLoc, boundingRect.Size), angle, maxVal));
                     }
-
+                   
                     if (showDebug)
                     {
                         CvInvoke.Imshow("matches", matchResult);
@@ -200,6 +209,7 @@ namespace Template_Matcher
                     using (Mat croppedSearchImage = new Mat(searchImage, roi))
                     using (Mat matchResult = new Mat())
                     {
+                        CvInvoke.Imwrite("examples/ROI.jpg", croppedSearchImage);
                         CvInvoke.MatchTemplate(croppedSearchImage, rotatedTemplateImage, matchResult, settings.SimilarityMeasure);
 
                         CvInvoke.MinMaxLoc(matchResult, ref minval, ref maxVal, ref minLoc, ref maxLoc);

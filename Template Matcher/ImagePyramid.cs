@@ -44,6 +44,8 @@ namespace Template_Matcher
                 layers[i] = new Mat();
                 var targetSize = new Size(layers[i-1].Width / this.scaleFactor, layers[i-1].Height / this.scaleFactor);
                 CvInvoke.Resize(layers[i - 1], layers[i], targetSize, interpolation: Inter.Area);
+                //CvInvoke.Imshow("Pyr", layers[i]);
+                //CvInvoke.WaitKey(0);
             }
         }
 

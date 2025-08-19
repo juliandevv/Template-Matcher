@@ -60,7 +60,7 @@ namespace Template_Matcher
 
         private void btnProcessImage_Click(object sender, EventArgs e)
         {
-            Matcher.ChangeSettings(new MatcherSettings(0.85, 0.85, 12, Emgu.CV.CvEnum.TemplateMatchingType.CcorrNormed));
+            Matcher.ChangeSettings(new MatcherSettings(0.65, 0.55, 12, Emgu.CV.CvEnum.TemplateMatchingType.CcorrNormed));
             Matcher.MatchTemplate(imbSearchImage.Image as Mat, imbTemplateImage.Image as Mat, out var result);
             //var result = CrossCorrelation.ComputeCC(imbSearchImage.Image as Mat, imbTemplateImage.Image as Mat);
 
